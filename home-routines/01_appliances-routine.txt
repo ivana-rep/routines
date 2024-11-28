@@ -1,0 +1,5 @@
+# monthly appliances maintenance routine
+
+1. clean washing machine + full cleaning cycle
+2. full dishwasher cleaning cycle
+3. descaling coffee machines
