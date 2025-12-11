@@ -1,31 +1,65 @@
-<TITLE>ivana-rep_routines</TITLE>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-        a:visited {
-            color: blue; /* I link visitati resteranno blu */
+<!doctype html>
+<html lang="en" data-theme="">
+  <head>
+    <meta charset="utf-8">
+    <title>routines</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <style>
+      :root {
+        --bg: #ffffff;
+        --fg: #111111;
+        --link: #005bff;
+        --accent: #cccccc;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #000000;
+          --fg: #ffffff;
+          --link: #8fc9ed;
+          --accent: #333333;
         }
+      }
+      [data-theme="dark"] {
+        --bg: #000000;
+        --fg: #ffffff;
+        --link: #8fc9ed;
+        --accent: #333333;
+      }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+        line-height: 1.35;
+        -webkit-font-smoothing: antialiased;
+        padding: 16px;
+      }
+      a, a:visited {
+        color: var(--link);
+        text-decoration: none;
+      }
+      a:hover { text-decoration: underline; }
+      pre {
+        margin: 0;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
     </style>
+  </head>
+  <body>
+<PRE># routines repository
 
-<PRE># Routines Repository
-
-# Personal Routines
-
-* <a href="personal-routines/00_emergency_routine.txt" target="_blank">Emergency</a>
-* <a href="personal-routines/01_morning-routine.txt" target="_blank">Morning</a>
-* <a href="personal-routines/02_eating-routine.txt" target="_blank">Healthy Eating</a>
-* <a href="personal-routines/03_afternoon-routine.txt" target="_blank">Afternoon</a> 
-* <a href="personal-routines/04_evening-routine.txt" target="_blank">Evening</a> 
-* <a href="personal-routines/05_decluttering-routine.txt" target="_blank">Decluttering</a>
-* <a href="personal-routines/06_thought-capsules-records.txt" target="_blank">Reading and taking notes habit</a>
-* <a href="personal-routines/07_weekly-review.txt" target="_blank">Weekly Review</a>
-
-# Home-Related Routines
-
-* <a href="home-routines/01_appliances-routine.txt" target="_blank">Appliances maintenance</a>
-
-# Work-Related Routines
-
-* <a href="work-routines/01_work-decluttering.txt" target="_blank">Work space decluttering</a>
-* <a href="work-routines/02_work-day-start.txt" target="_blank">Work-day start</a>
+# personal routines
+↳ <a href="personal-routines/00_emergency_routine.txt" target="_blank">emergency</a>
+↳ <a href="personal-routines/01_morning-routine.txt" target="_blank">morning</a>
+↳ <a href="personal-routines/02_eating-routine.txt" target="_blank">mindful eating</a>
+↳ <a href="personal-routines/03_afternoon-routine.txt" target="_blank">afternoon</a> 
+↳ <a href="personal-routines/04_evening-routine.txt" target="_blank">evening</a> 
+↳ <a href="personal-routines/05_decluttering-routine.txt" target="_blank">decluttering</a>
+↳ <a href="personal-routines/06_reading.txt" target="_blank">reading and note-taking</a>
 
 </PRE>
+  </body>
+</html>

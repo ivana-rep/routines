@@ -1,0 +1,8 @@
+# reading + taking/publishing notes
+
+daily:
+1. read selected content (preferably in a reader app)
+2. read at least 30 minutes
+3. log the reading sessions 
+4. music is allowed for focus
+5. remember to capture notes in your system

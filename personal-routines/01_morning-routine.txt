@@ -1,7 +1,7 @@
 # morning routine
 
-1. stretching
-2. journal
-3. health tracker update
-3. breakfast
-(if possible - quick walk)
+1. light stretching
+2. update basic trackers (mood, energy, body)
+3. simple breakfast
+4. optional short walk
+5. choose one task for the morning

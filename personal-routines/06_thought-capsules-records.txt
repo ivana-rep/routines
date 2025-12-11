@@ -1,6 +1,0 @@
-# reading + taking/publishing notes
-
-everyday
-1. consume selected content, preferably in reader app 
-2. take notes in kortex
-3. create and edit notion records
