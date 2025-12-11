@@ -30,76 +30,73 @@
   <body>
     <pre id="content">Loading…</pre>
 
-<script>
-  // Theme: saved choice or system default
-  (function () {
-    const KEY = "routines-theme";
-    const root = document.documentElement;
-    let theme = null;
-    try {
-      const saved = localStorage.getItem(KEY);
-      if (saved === "dark" || saved === "light") theme = saved;
-    } catch (_) {}
-    if (!theme) theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    root.setAttribute("data-theme", theme);
-  }());
+    <script>
+      // Theme: saved choice or system default
+      (function () {
+        const KEY = "routines-theme";
+        const root = document.documentElement;
+        let theme = null;
+        try {
+          const saved = localStorage.getItem(KEY);
+          if (saved === "dark" || saved === "light") theme = saved;
+        } catch (_) {}
+        if (!theme) theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        root.setAttribute("data-theme", theme);
+      }());
 
-  // Load .txt and render with minimal linkify
-  (function () {
-    const out = document.getElementById("content");
-    const params = new URLSearchParams(location.search);
-    const path = params.get("p");
-    if (!path) {
-      out.textContent = "Missing ?p=relative/path/to/file.txt";
-      out.className = "err";
-      return;
-    }
+      // Load .txt and render with minimal linkify
+      (function () {
+        const out = document.getElementById("content");
+        const params = new URLSearchParams(location.search);
+        const path = params.get("p");
+        if (!path) {
+          out.textContent = "Missing ?p=relative/path/to/file.txt";
+          out.className = "err";
+          return;
+        }
 
-    // ---- NEW TITLE LOGIC ----
-    // Use the filename, e.g. "00_emergency_routine.txt"
-    const filename = path.split("/").pop();
-    document.title = filename;
-    // -------------------------
+        // Use the filename ONLY as title (no first-line override)
+        const filename = path.split("/").pop();
+        document.title = filename || "routine";
 
-    fetch(path, { cache: "no-store" })
-      .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
-      .then(text => {
-        // Escape HTML
-        let html = text
-          .replace(/&/g,"&amp;")
-          .replace(/</g,"&lt;")
-          .replace(/>/g,"&gt;");
+        fetch(path, { cache: "no-store" })
+          .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
+          .then(text => {
+            // 1) Escape HTML
+            let html = text
+              .replace(/&/g,"&amp;")
+              .replace(/</g,"&lt;")
+              .replace(/>/g,"&gt;");
 
-        // Clean common pasted junk
-        html = html.replace(/\s*target="_blank"\s*rel="noopener"/g, "");
-        html = html.replace(/"&gt;/g, "");
+            // 2) Clean common pasted junk
+            html = html.replace(/\s*target="_blank"\s*rel="noopener"/g, "");
+            html = html.replace(/"&gt;/g, "");
 
-        // Markdown links
-        const mdLink = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
-        html = html.replace(mdLink, (_, label, url) =>
-          `<a href="${url}" target="_blank" rel="noopener">${label}</a>`
-        );
+            // 3) Markdown links: [label](https?:...)
+            const mdLink = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
+            html = html.replace(mdLink, (_, label, url) =>
+              `<a href="${url}" target="_blank" rel="noopener">${label}</a>`
+            );
 
-        // Angle <https://url>
-        const angle = /&lt;(https?:\/\/[^&\s>]+)&gt;/g;
-        html = html.replace(angle, (_, url) =>
-          `<a href="${url}" target="_blank" rel="noopener">${url}</a>`
-        );
+            // 4) Angle-bracket links: <https://...>
+            const angle = /&lt;(https?:\/\/[^&\s>]+)&gt;/g;
+            html = html.replace(angle, (_, url) =>
+              `<a href="${url}" target="_blank" rel="noopener">${url}</a>`
+            );
 
-        // Bare URLs
-        const bare = /(^|[\s>(;])((https?:\/\/[^\s<>"')]+))/g;
-        html = html.replace(bare, (m, pre, url) =>
-          `${pre}<a href="${url}" target="_blank" rel="noopener">${url}</a>`
-        );
+            // 5) Bare URLs
+            const bare = /(^|[\s>(;])((https?:\/\/[^\s<>"')]+))/g;
+            html = html.replace(bare, (m, pre, url) =>
+              `${pre}<a href="${url}" target="_blank" rel="noopener">${url}</a>`
+            );
 
-        out.innerHTML = html;
-      })
-      .catch(err => {
-        out.textContent = "Failed to load " + path + "\n" + err;
-        out.className = "err";
-      });
-  }());
-</script>
-
+            out.innerHTML = html;
+          })
+          .catch(err => {
+            out.textContent = "Failed to load " + path + "\n" + err;
+            out.className = "err";
+          });
+      }());
+    </script>
   </body>
 </html>
